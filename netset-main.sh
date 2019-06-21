@@ -121,7 +121,7 @@ $CYAN|$RESET Menu Options
 $CYAN|$RESET
 $CYAN|$RESET 'Usage'          - Print options overview
 $CYAN|$RESET 'Status'         - Print Status overview
-$CYAN|$RESET 'Spoof MAC       - Spoof MAC Address
+$CYAN|$RESET 'Spoof MAC'       - Spoof MAC Address
 $CYAN|$RESET 'Random Proxies' - Scrape random proxies
 $CYAN|$RESET 'GeoSort Proxies'- Scrape GeoSorted proxies
 $CYAN|$RESET 'ProtonVPN'      - Start ProtonVPN
