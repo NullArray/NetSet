@@ -59,7 +59,7 @@ Menu Options
                     through Tor.
  'OPSEC Resources'- Display NetSet's included
                     list of web resources.
-  					        Select an entry to open
+  		    Select an entry to open
                     it in your default browser
 ```
 
