@@ -35,13 +35,13 @@ CLI Arguments
     terminal multiplexer with all       
     connections routed through Tor        
 										 
- 	'-s' or '--status' prints a status   
- 	overview of NetSet related network   
-  utilities and their current state.
+    '-s' or '--status' prints a status   
+    overview of NetSet related network   
+    utilities and their current state.
 
- 	'-i' or '--install' runs a script
- 	designed to install all of NetSet's
- 	dependencies and configures them
+    '-i' or '--install' runs a script
+    designed to install all of NetSet's
+    dependencies and configures them
 
 Menu Options
 
