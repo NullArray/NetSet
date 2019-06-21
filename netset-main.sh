@@ -108,7 +108,7 @@ $CYAN|$RESET CLI Arguments                            $CYAN | $RESET
 $CYAN|$RESET    '-t' or '--terminal' Starts           $CYAN | $RESET
 $CYAN|$RESET    terminal multiplexer with all         $CYAN | $RESET
 $CYAN|$RESET    connections routed through Tor        $CYAN | $RESET
-$CYAN|$RESET										  $CYAN | $RESET
+$CYAN|$RESET					      $CYAN | $RESET
 $CYAN|$RESET 	'-s' or '--status' prints a status    $CYAN | $RESET
 $CYAN|$RESET 	overview of NetSet related network    $CYAN + $RESET
 $CYAN|$RESET    utilities and their current state.
@@ -277,8 +277,8 @@ function torwall(){
 	notification "TorWall uses IPTables and Tor as a Transparant SOCKS proxy."
 	echo -e "Please remember that this is not the most secure way of using Tor\n"
 	echo -e "It is recommended to at least have DNSCrypt-proxy running as well."
-	echo -e "Or start a Tor Terminal Session instead."
-	sleep 2
+	echo -e "Or start a Tor Terminal Session instead.\n\n"
+	sleep 4 && clear
 	# Tor user id
 	_tor_uid=$(id -u debian-tor)
 	# Add regular user to tor-uid
