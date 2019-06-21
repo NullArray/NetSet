@@ -121,7 +121,7 @@ $CYAN|$RESET Menu Options
 $CYAN|$RESET
 $CYAN|$RESET 'Usage'          - Print options overview
 $CYAN|$RESET 'Status'         - Print Status overview
-$CYAN|$RESET 'Spoof MAC'      - Spoof MAC Address
+$CYAN|$RESET 'Spoof MAC       - Spoof MAC Address
 $CYAN|$RESET 'Random Proxies' - Scrape random proxies
 $CYAN|$RESET 'GeoSort Proxies'- Scrape GeoSorted proxies
 $CYAN|$RESET 'ProtonVPN'      - Start ProtonVPN
@@ -290,47 +290,47 @@ function torwall(){
 	_non_tor="127.0.0.0/8 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16"
 
 	notification_b "Writing new FireWall rules."
-	IPT=$(sudo /sbin/iptables)
+	#IPT=$(sudo /sbin/iptables)
 
-	$IPT -F
-	$IPT -X
-	$IPT -t nat -F
-	$IPT -t nat -X
-	$IPT -t mangle -F
-	$IPT -t mangle -X
-	$IPT -P INPUT ACCEPT
-	$IPT -P FORWARD ACCEPT
-	$IPT -P OUTPUT ACCEPT
+	sudo iptables -F
+	sudo iptables -X
+	sudo iptables -t nat -F
+	sudo iptables -t nat -X
+	sudo iptables -t mangle -F
+	sudo iptables -t mangle -X
+	sudo iptables -P INPUT ACCEPT
+	sudo iptables -P FORWARD ACCEPT
+	sudo iptables -P OUTPUT ACCEPT
 
 	# Allow established connections
-	$IPT -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-	$IPT -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+	sudo iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+	sudo iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 
 	# Allow traffic on loopback interface
-	$IPT -A INPUT -i lo -j ACCEPT
+	sudo iptables -A INPUT -i lo -j ACCEPT
 
 	# Allow all tor traffic
-	$IPT -t nat -A OUTPUT -m owner --uid-owner $_tor_uid -j RETURN
+	sudo iptables -t nat -A OUTPUT -m owner --uid-owner $_tor_uid -j RETURN
 
 	# Route DNS queries through tor
-	# $IPT -t nat -A OUTPUT -p udp --dport 53 -j REDIRECT --to-ports 53
+	# sudo iptables -t nat -A OUTPUT -p udp --dport 53 -j REDIRECT --to-ports 53
 
 	# Allow direct destinations
 	for i in $_non_tor; do
-		$IPT -t nat -A OUTPUT -d $i -j RETURN
-		$IPT -A OUTPUT -d $i -j RETURN
+		sudo iptables -t nat -A OUTPUT -d $i -j RETURN
+		sudo iptables -A OUTPUT -d $i -j RETURN
 	done
 
 	# Route all traffic through tor
-	$IPT -t nat -A OUTPUT -p tcp --syn -j REDIRECT --to-ports $_trans_port
-	$IPT -A OUTPUT ! -o lo ! -d 127.0.0.1 ! -s 127.0.0.1 -p tcp -m tcp --tcp-flags ACK,FIN ACK,FIN -j LOG --log-prefix "Transproxy leak blocked: " --log-uid
-	$IPT -A OUTPUT ! -o lo ! -d 127.0.0.1 ! -s 127.0.0.1 -p tcp -m tcp --tcp-flags ACK,RST ACK,RST -j LOG --log-prefix "Transproxy leak blocked: " --log-uid
-	$IPT -A OUTPUT ! -o lo ! -d 127.0.0.1 ! -s 127.0.0.1 -p tcp -m tcp --tcp-flags ACK,FIN ACK,FIN -j DROP
-	$IPT -A OUTPUT ! -o lo ! -d 127.0.0.1 ! -s 127.0.0.1 -p tcp -m tcp --tcp-flags ACK,RST ACK,RST -j DROP
+	sudo iptables -t nat -A OUTPUT -p tcp --syn -j REDIRECT --to-ports $_trans_port
+	sudo iptables -A OUTPUT ! -o lo ! -d 127.0.0.1 ! -s 127.0.0.1 -p tcp -m tcp --tcp-flags ACK,FIN ACK,FIN -j LOG --log-prefix "Transproxy leak blocked: " --log-uid
+	sudo iptables -A OUTPUT ! -o lo ! -d 127.0.0.1 ! -s 127.0.0.1 -p tcp -m tcp --tcp-flags ACK,RST ACK,RST -j LOG --log-prefix "Transproxy leak blocked: " --log-uid
+	sudo iptables -A OUTPUT ! -o lo ! -d 127.0.0.1 ! -s 127.0.0.1 -p tcp -m tcp --tcp-flags ACK,FIN ACK,FIN -j DROP
+	sudo iptables -A OUTPUT ! -o lo ! -d 127.0.0.1 ! -s 127.0.0.1 -p tcp -m tcp --tcp-flags ACK,RST ACK,RST -j DROP
 
-	$IPT -A OUTPUT -m owner --uid-owner $_tor_uid -j ACCEPT
+	sudo iptables -A OUTPUT -m owner --uid-owner $_tor_uid -j ACCEPT
 
-	$IPT -A OUTPUT -j REJECT to $UID
+	sudo iptables -A OUTPUT -j REJECT to $UID
 
 	notification "Done" && sleep 2
 	status
@@ -343,7 +343,7 @@ function ip_tabs(){
 	notification_b "Start or Stop TorWall?"
 	read -p '[start]/[stop] ' choice
 	if [[ $choice == 'Start' || $choice == 'start' ]]; then
-		sudo iptables-save 2&> ip_table_backup/my.active.firewall.rules
+		sudo iptables-save > ip_table_backup/my.active.firewall.rules
 		torwall
 	else
 		if [[ $choice == 'Stop' || $choice == 'stop' ]]; then
