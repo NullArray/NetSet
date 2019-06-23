@@ -196,7 +196,7 @@ Pin-Priority: 100 " > pinning.pref
 			read -p 'Enter any button to to continue: ' null && clear
 			notification "Preparations complete. Installing."
 			sudo apt update && sudo apt install -y testing dnscrypt-proxy
-            sudo apt install -y unstable dnscrypt-proxy
+                        sudo apt install -y unstable dnscrypt-proxy
 			notification "Operations Completed"
 		else
 			os=$(uname -a)
