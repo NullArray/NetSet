@@ -54,7 +54,7 @@ function dns_test(){
 	notification "Testing DNSCrypt-proxy configuration" && sleep 2
 
 	# Check if we can resolve github.com
-	dnscrypt-proxy -resolve github.com 2&> /dev/null || dcheck=1
+	dnscrypt-proxy -resolve github.com > /dev/null || dcheck=1
 
 	if [[ $dcheck == 1 ]]; then
 		warning "Unable to resolve hosts with DNSCrypt-proxy"
@@ -87,8 +87,7 @@ function dns_test(){
 
 function resolv_conf(){
 	# Creating resolv.conf overide
-	echo "nameserver 127.0.2.1" > resolv.conf.override
-	mv -f resolv.conf.override /etc/
+	echo "nameserver 127.0.2.1" | sudo tee /etc/resolv.conf.override
 	sudo chmod 0777 /etc/resolv.conf.override
 	sudo chown root:root /etc/resolv.conf.override
 
@@ -118,8 +117,8 @@ function conf_dnsmasq(){
 	echo -e"# Redirect everything to dnscrypt-proxy
 server=127.0.2.1
 no-resolv
-proxy-dnssec" > tmp.log
-	sudo cat tmp.log > /etc/dnsmasq.d/dnscrypt-proxy
+proxy-dnssec" | sudo tee /etc/dnsmasq.d/dnscrypt-proxy
+
 	}
 
 function conf_netman(){
@@ -131,8 +130,8 @@ plugins=ifupdown,keyfile,ofono
 #dns=dnsmasq
 
 [ifupdown]
-managed=false" > tmp.log
-	sudo cat tmp.log > /etc/NetworkManager/NetworkManager.conf
+managed=false" | sudo tee /etc/NetworkManager/NetworkManager.conf
+
 
 	}
 
@@ -197,7 +196,7 @@ Pin-Priority: 100 " > pinning.pref
 			read -p 'Enter any button to to continue: ' null && clear
 			notification "Preparations complete. Installing."
 			sudo apt update && sudo apt install -y testing dnscrypt-proxy
-			sudo apt update && sudo apt install -y unstable dnscrypt-proxy
+            sudo apt install -y unstable dnscrypt-proxy
 			notification "Operations Completed"
 		else
 			os=$(uname -a)
@@ -222,7 +221,7 @@ Pin-Priority: 100 " > pinning.pref
 					notification "Configuring resolvconv"
 					resolv_conf
 				else
-					stat /etc/dnsmasq.d/dnscrypt-proxy 2&> /dev/null || notification "Configuring dnsmasq" && conf_dnsmasq
+					stat /etc/dnsmasq.d/dnscrypt-proxy > /dev/null || notification "Configuring dnsmasq" && conf_dnsmasq
 					notification "Configuring resolvconv"
 					resolv_conf
 				fi
@@ -247,11 +246,8 @@ Before making changes all relevant config files will
 be backed up in a directory labeled: 'backup- $(date) '\n"
 	read -p 'Start installation? [Y]es/[N]o: ' choice
 	if [[ $choice == 'y' || $choice == 'Y' ]]; then
-		# Creating dirs
-		notification "Creating directories."
-		mkdir "backup-$(date)"
-		mkdir ip_table_backup
-		mkdir proxies
+
+
 		# Install utilities
 		notification "Checking system utilities." && sleep 2
 		if [[ -z $(which pymux) ]]; then pip install pymux; fi
@@ -301,11 +297,18 @@ be backed up in a directory labeled: 'backup- $(date) '\n"
 	fi
 
 	}
+# Creating dirs, we don't want them to have messed up perms
+# if dir exists STDERR to /dev/null
+mkdir "backup-$(date)" 2&> /dev/null
+mkdir ip_table_backup 2&> /dev/null
+mkdir proxies 2&> /dev/null
 
 if [[ "$EUID" -ne 0 ]]; then
+    notification "Creating directories."
     warning "Script requires 'root' to run"
 	exit 1
 else
-	check
-	sudo chmod --recursive 777 .
+
+    check
+
 fi
