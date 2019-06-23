@@ -230,7 +230,6 @@ Pin-Priority: 100 " > pinning.pref
 	fi
 
 	notification "Task Completed"
-
 	}
 
 
