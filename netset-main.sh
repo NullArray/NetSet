@@ -108,7 +108,7 @@ $CYAN|$RESET CLI Arguments                            $CYAN | $RESET
 $CYAN|$RESET    '-t' or '--terminal' Starts           $CYAN | $RESET
 $CYAN|$RESET    terminal multiplexer with all         $CYAN | $RESET
 $CYAN|$RESET    connections routed through Tor        $CYAN | $RESET
-$CYAN|$RESET										  $CYAN | $RESET
+$CYAN|$RESET					      $CYAN | $RESET
 $CYAN|$RESET 	'-s' or '--status' prints a status    $CYAN | $RESET
 $CYAN|$RESET 	overview of NetSet related network    $CYAN + $RESET
 $CYAN|$RESET    utilities and their current state.
@@ -167,7 +167,7 @@ function chmac(){
 		if [[ $choice == 'c' || $choice == 'C' ]]; then
 			read -p 'Enter Custom MAC: ' value
 			for x in $IFACES; do sudo macchanger --mac=$value $x; done
-            notification "Done" && sleep 4
+                        notification "Done" && sleep 4
 		else
 			warning "Unhandled Option"
 		fi
@@ -191,7 +191,7 @@ function status(){
 	protonvpn-cli --status && sleep 3.5 || warning "ProtonVPN not configured"
 	notification "Loading relevant services status..." && sleep 2
 
-    sudo systemctl status tor.service
+        sudo systemctl status tor.service
 	tr=$(sudo systemctl status tor.service)
 	case $tr in
 		# Does the var contain the string below?
@@ -200,7 +200,7 @@ function status(){
 		;;
 	esac
 
-    sudo systemctl status openvpn.service
+        sudo systemctl status openvpn.service
 	ovpn=$(sudo systemctl status openvpn.service)
 	case $ovpn in
 		# Does the var contain the string below?
@@ -209,7 +209,7 @@ function status(){
 		;;
 	esac
 
-    sudo systemctl status dnscrypt-proxy.service
+        sudo systemctl status dnscrypt-proxy.service
 	dnsc=$(sudo systemctl status dnscrypt-proxy.service)
 	case $dnsc in
 		# Does the var contain the string below?
@@ -237,12 +237,10 @@ function status(){
 
 	# CLI arg status operation ends here
 	if [[ $stus == 1 ]]; then notification_b "Status check completed" && exit 0; fi
+            notification "Done."
+	    read -p 'Enter any button to continue: ' null
 
-	notification "Done."
-	read -p 'Enter any button to continue: ' null
-
-	clear && menu
-
+	    clear && menu
 	}
 
 function proxy_ops(){
@@ -317,8 +315,8 @@ function torwall(){
 
 	# Allow direct destinations
 	for i in $_non_tor; do
-		sudo iptables -t nat -A OUTPUT -d $i -j RETURN
-		sudo iptables -A OUTPUT -d $i -j RETURN
+	    sudo iptables -t nat -A OUTPUT -d $i -j RETURN
+	    sudo iptables -A OUTPUT -d $i -j RETURN
 	done
 
 	# Route all traffic through tor
@@ -367,7 +365,7 @@ function ip_tabs(){
 function resources(){
 	# Online resources
 	logo
-    notification "View OPSEC related resources in your browser."
+        notification "View OPSEC related resources in your browser."
 	PS3='Please enter your choice: '
 	options=("Valid MAC Addresses" "HiddenWall - Kernel Module FireWall" "OPSEC Resources - GreySec" "OPSEC Resources - TheGrugq" "OPSEC Presentations - TheGrugq"  "Personal Security Guide - CryptoSeb" "OPSEC Blog - B3RN3D" "OPSEC & Privacy e-book - @CryptoCypher" "Quit")
 	select opt in "${options[@]}"
@@ -410,15 +408,14 @@ function resources(){
 			printf "%b \n"
 				;;
 			"Quit")
-             break
+                         break
 				;;
 			*) echo invalid option;;
 		esac
 	done
 
     menu
-
-	}
+    }
 
 # Main menu
 function menu(){
@@ -479,22 +476,22 @@ function menu(){
 # Check for command line arguments
 if [[ "$1" != "" ]]; then
     case $1 in
-		'-i' | '--install' )
-		bash depconf.sh && menu
+	    '-i' | '--install' )
+	    bash depconf.sh && menu
 	esac
 fi
 
 if [[ "$1" != "" ]]; then
 	case $1 in
-		'-s' | '--status' )
-		status
+	    '-s' | '--status' )
+	    status
 	esac
 fi
 
 if [[ "$1" != "" ]]; then
 	case $1 in
-		'-t' | '--terminal' )
-		torsocks python -m pymux #|| . torsocks on
+	    '-t' | '--terminal' )
+	    torsocks python -m pymux #|| . torsocks on
 	esac
 fi
 
@@ -525,6 +522,6 @@ if [[ "$EUID" -ne 0 ]]; then
     fi
 else
     # Check to see if depconf.sh has been succesfully executed
-	stat installed.log > /dev/null && go || warning "Dependencies missing, restart the script with --install" && exit 1
+    stat installed.log > /dev/null && go || warning "Dependencies missing, restart the script with --install" && exit 1
 fi
 
