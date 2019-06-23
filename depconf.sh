@@ -234,7 +234,7 @@ Pin-Priority: 100 " > pinning.pref
 	}
 
 
-function check(){
+function start(){
 	# Print banner
 	logo
 	echo -e "\n
@@ -297,17 +297,5 @@ be backed up in a directory labeled: 'backup- $(date) '\n"
 	fi
 
 	}
-# Creating dirs, we don't want them to have messed up perms
-# if dir exists STDERR to /dev/null
-mkdir "backup-$(date)" 2&> /dev/null
-mkdir ip_table_backup 2&> /dev/null
-mkdir proxies 2&> /dev/null
-
-if [[ "$EUID" -ne 0 ]]; then
-    notification "Creating directories."
-    warning "Script requires 'root' to run"
-    exit 1
-else
-    check
-
-fi
+# Start
+start
