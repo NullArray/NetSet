@@ -108,9 +108,9 @@ $CYAN|$RESET CLI Arguments                          $CYAN | $RESET
 $CYAN|$RESET    '-t' or '--terminal' Starts         $CYAN | $RESET
 $CYAN|$RESET    terminal multiplexer with all       $CYAN | $RESET
 $CYAN|$RESET    connections routed through Tor      $CYAN | $RESET
-$CYAN|$RESET										                    $CYAN | $RESET
-$CYAN|$RESET 	'-s' or '--status' prints a status    $CYAN | $RESET
-$CYAN|$RESET 	overview of NetSet related network    $CYAN + $RESET
+$CYAN|$RESE                                         $CYAN | $RESET
+$CYAN|$RESET 	'-s' or '--status' prints a status  $CYAN | $RESET
+$CYAN|$RESET 	overview of NetSet related network  $CYAN + $RESET
 $CYAN|$RESET    utilities and their current state.
 $CYAN|$RESET
 $CYAN|$RESET 	'-i' or '--install' runs a script
@@ -133,7 +133,7 @@ $CYAN|$RESET                    force all connections
 $CYAN|$RESET                    through Tor.
 $CYAN|$RESET 'OPSEC Resources'- Display NetSet's included
 $CYAN|$RESET                    list of web resources.
-$CYAN|$RESET  					Select an entry to open
+$CYAN|$RESET  			Select an entry to open
 $CYAN|$RESET                    it in your default browser
 $CYAN|$RESET
 $CYAN+---------------------------->
@@ -161,16 +161,16 @@ function chmac(){
 	notification_b "Use a random MAC Address or custom?"
 	read -p '[R]andom/[C]ustom ' choice
 	if [[ $choice == 'r' || $choice == 'R' ]]; then
-		for x in $IFACES; do sudo macchanger --random $x; done
-		notification "Done" && sleep 4
+	    for x in $IFACES; do sudo macchanger --random $x; done
+	    notification "Done" && sleep 4
 	else
-		if [[ $choice == 'c' || $choice == 'C' ]]; then
-			read -p 'Enter Custom MAC: ' value
-			for x in $IFACES; do sudo macchanger --mac=$value $x; done
-            notification "Done" && sleep 4
-		else
-			warning "Unhandled Option"
-		fi
+	    if [[ $choice == 'c' || $choice == 'C' ]]; then
+		read -p 'Enter Custom MAC: ' value
+		for x in $IFACES; do sudo macchanger --mac=$value $x; done
+                notification "Done" && sleep 4
+	    else
+		warning "Unhandled Option"
+	    fi
 	fi
 	menu
 	}
@@ -178,7 +178,7 @@ function chmac(){
 
 function status(){
 	# This function provides a quick overview of the network status
-	if [[ stus == 1 ]]; then logo; fi
+        if [[ stus == 1 ]]; then logo; fi
 
 	notification "Loading status information..." && sleep 2
 
@@ -191,57 +191,60 @@ function status(){
 	protonvpn-cli --status && sleep 3.5 || warning "ProtonVPN not configured"
 	notification "Loading relevant services status..." && sleep 2
 
-    sudo systemctl status tor.service
+        sudo systemctl status tor.service
 	tr=$(sudo systemctl status tor.service)
+	
 	case $tr in
-		# Does the var contain the string below?
-		*"Active: inactive (dead)"*)
-		t=1
-		;;
+	    # Does the var contain the string below?
+	    *"Active: inactive (dead)"*)
+	    t=1
+	    ;;
 	esac
 
-    sudo systemctl status openvpn.service
+        sudo systemctl status openvpn.service
 	ovpn=$(sudo systemctl status openvpn.service)
+	
 	case $ovpn in
-		# Does the var contain the string below?
-		*"Active: inactive (dead)"*)
-		o=1
-		;;
+	    # Does the var contain the string below?
+	    *"Active: inactive (dead)"*)
+	    o=1
+	    ;;
 	esac
 
-    sudo systemctl status dnscrypt-proxy.service
+        sudo systemctl status dnscrypt-proxy.service
 	dnsc=$(sudo systemctl status dnscrypt-proxy.service)
+	
 	case $dnsc in
-		# Does the var contain the string below?
-		*"Active: inactive (dead)"*)
-		d=1
-		;;
+	    # Does the var contain the string below?
+	    *"Active: inactive (dead)"*)
+	    d=1
+	    ;;
 	esac
 
 
 	# Report and activate inactive services
 	if [[ $d == 1 ]]; then
-		warning "DNS Crypt Service is inactive"
-		sudo systemctl restart dnscrypt-proxy && notification "Service Restarted" || warning "An error was encountered while trying to start the DNS Crypt Service"
+	     warning "DNS Crypt Service is inactive"
+	    sudo systemctl restart dnscrypt-proxy && notification "Service Restarted" || warning "An error was encountered while trying to start the DNS Crypt Service"
 	fi
 
 	if [[ $o == 1 ]]; then
-		warning "OpenVPN Service is inactive"
-		sudo systemctl restart openvpn && notification "Service Restarted" || warning "An error was encountered while trying to start the OpenVPN Service"
+	    warning "OpenVPN Service is inactive"
+	    sudo systemctl restart openvpn && notification "Service Restarted" || warning "An error was encountered while trying to start the OpenVPN Service"
 	fi
 
 	if [[ $t == 1 ]]; then
-		warning "Tor Service is inactive"
-		sudo systemctl restart tor && notification "Service Restarted" || warning "An error was encountered while trying to start the Tor Service"
+	    warning "Tor Service is inactive"
+	    sudo systemctl restart tor && notification "Service Restarted" || warning "An error was encountered while trying to start the Tor Service"
 	fi
 
 	# CLI arg status operation ends here
 	if [[ $stus == 1 ]]; then notification_b "Status check completed" && exit 0; fi
 
-	notification "Done."
-	read -p 'Enter any button to continue: ' null
+	    notification "Done."
+	    read -p 'Enter any button to continue: ' null
 
-	clear && menu
+	    clear && menu
 
 	}
 
