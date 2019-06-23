@@ -108,7 +108,7 @@ $CYAN|$RESET CLI Arguments                            $CYAN | $RESET
 $CYAN|$RESET    '-t' or '--terminal' Starts           $CYAN | $RESET
 $CYAN|$RESET    terminal multiplexer with all         $CYAN | $RESET
 $CYAN|$RESET    connections routed through Tor        $CYAN | $RESET
-$CYAN|$RESET					      $CYAN | $RESET
+$CYAN|$RESET										  $CYAN | $RESET
 $CYAN|$RESET 	'-s' or '--status' prints a status    $CYAN | $RESET
 $CYAN|$RESET 	overview of NetSet related network    $CYAN + $RESET
 $CYAN|$RESET    utilities and their current state.
@@ -121,7 +121,7 @@ $CYAN|$RESET Menu Options
 $CYAN|$RESET
 $CYAN|$RESET 'Usage'          - Print options overview
 $CYAN|$RESET 'Status'         - Print Status overview
-$CYAN|$RESET 'Spoof MAC'       - Spoof MAC Address
+$CYAN|$RESET 'Spoof MAC       - Spoof MAC Address
 $CYAN|$RESET 'Random Proxies' - Scrape random proxies
 $CYAN|$RESET 'GeoSort Proxies'- Scrape GeoSorted proxies
 $CYAN|$RESET 'ProtonVPN'      - Start ProtonVPN
@@ -277,8 +277,8 @@ function torwall(){
 	notification "TorWall uses IPTables and Tor as a Transparant SOCKS proxy."
 	echo -e "Please remember that this is not the most secure way of using Tor\n"
 	echo -e "It is recommended to at least have DNSCrypt-proxy running as well."
-	echo -e "Or start a Tor Terminal Session instead.\n\n"
-	sleep 4 && clear
+	echo -e "Or start a Tor Terminal Session instead."
+	sleep 2
 	# Tor user id
 	_tor_uid=$(id -u debian-tor)
 	# Add regular user to tor-uid
@@ -480,7 +480,7 @@ function menu(){
 if [[ "$1" != "" ]]; then
     case $1 in
 		'-i' | '--install' )
-		sudo bash depconf.sh && menu
+		bash depconf.sh && menu
 	esac
 fi
 
@@ -507,9 +507,22 @@ function go(){
     menu
     }
 
+# Creating dirs, we don't want them to have messed up perms
+# if dir exists STDERR to /dev/null
+mkdir "backup-$(date)" 2&> /dev/null
+mkdir ip_table_backup 2&> /dev/null
+mkdir proxies 2&> /dev/null
+
 # Check for root
 if [[ "$EUID" -ne 0 ]]; then
-   warning "Script requires Root to run."
+   warning "Some operations require Root to run."
+   read -p "Continue as normal user? [Y]es/[N]o " choice
+   if [[ $choice == 'Y' || $choice == 'y' ]]; then
+       stat installed.log > /dev/null && go || warning "Dependencies missing, restart the script with --install" && exit 1
+    else
+        warning "User Aborted"
+        exit 1
+    fi
 else
     # Check to see if depconf.sh has been succesfully executed
 	stat installed.log > /dev/null && go || warning "Dependencies missing, restart the script with --install" && exit 1
