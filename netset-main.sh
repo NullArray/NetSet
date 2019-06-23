@@ -482,23 +482,23 @@ function menu(){
 # Check for command line arguments
 if [[ "$1" != "" ]]; then
     case $1 in
-		'-i' | '--install' )
-		bash depconf.sh && menu
-	esac
+	'-i' | '--install' )
+	bash depconf.sh && menu
+    esac
 fi
 
 if [[ "$1" != "" ]]; then
-	case $1 in
-		'-s' | '--status' )
-		status
-	esac
+    case $1 in
+	'-s' | '--status' )
+	status
+    esac
 fi
 
 if [[ "$1" != "" ]]; then
-	case $1 in
-		'-t' | '--terminal' )
-		torsocks python -m pymux #|| . torsocks on
-	esac
+    case $1 in
+	'-t' | '--terminal' )
+	torsocks python -m pymux #|| . torsocks on
+    esac
 fi
 
 function go(){
@@ -528,5 +528,5 @@ if [[ "$EUID" -ne 0 ]]; then
     fi
 else
     # Check to see if depconf.sh has been succesfully executed
-	stat installed.log > /dev/null && go || warning "Dependencies missing, restart the script with --install" && exit 1
+    stat installed.log > /dev/null && go || warning "Dependencies missing, restart the script with --install" && exit 1
 fi
