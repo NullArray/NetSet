@@ -253,7 +253,7 @@ be backed up in a directory labeled: 'backup- $(date) '\n"
 		if [[ -z $(which pymux) ]]; then pip install pymux; fi
 		if [[ -z $(which tor) ]]; then sudo apt-get -y install tor; fi
 		if [[ -z $(which nmcli) ]]; then sudo apt-get -y install nmcli; fi
-	    if [[ -z $(which torsocks) ]]; then sudo apt-get -y install torsocks; fi
+	        if [[ -z $(which torsocks) ]]; then sudo apt-get -y install torsocks; fi
 		if [[ -z $(which openvpn) ]]; then sudo apt-get -y install openvpn; fi
 		if [[ -z $(which iptables) ]]; then sudo apt-get -y install iptables; fi
 		if [[ -z $(which macchanger) ]]; then sudo apt-get -y install macchanger; fi
@@ -306,9 +306,8 @@ mkdir proxies 2&> /dev/null
 if [[ "$EUID" -ne 0 ]]; then
     notification "Creating directories."
     warning "Script requires 'root' to run"
-	exit 1
+    exit 1
 else
-
     check
 
 fi
