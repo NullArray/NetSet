@@ -224,7 +224,7 @@ function status(){
 
 	# Report and activate inactive services
 	if [[ $d == 1 ]]; then
-	     warning "DNS Crypt Service is inactive"
+	    warning "DNS Crypt Service is inactive"
 	    sudo systemctl restart dnscrypt-proxy && notification "Service Restarted" || warning "An error was encountered while trying to start the DNS Crypt Service"
 	fi
 
@@ -265,12 +265,12 @@ function proxy_ops(){
 	if [[ $choice == '5' ]]; then python proxies/fetch.py --country='china|japan|korea|thailand|india|bangladesh|hong kong' --max-latency=3 --anonymity='elite|anonymous' --output=Asia.log; fi
 
 	if [[ $choice == 'Q' || $choice == 'q' ]]; then
-		echo -e "Returning to main menu..."
-		sleep 2 && menu
+	    echo -e "Returning to main menu..."
+	    sleep 2 && menu
 	else
-		warning "Unhandled Option"
-		echo -e "Returning to main menu..."
-		sleep 2 && menu
+	    warning "Unhandled Option"
+	    echo -e "Returning to main menu..."
+	    sleep 2 && menu
 
 	fi
 	}
@@ -349,28 +349,28 @@ function ip_tabs(){
 		sudo iptables-save > ip_table_backup/my.active.firewall.rules
 		torwall
 	else
-		if [[ $choice == 'Stop' || $choice == 'stop' ]]; then
-			# Reverse changes
-			sudo iptables -F
-			sudo iptables -X
-			sudo iptables -Z
-			sudo iptables -t nat -F
-			sudo iptables -t nat -X
-			sudo iptables -t nat -Z
-			sudo iptables-restore ip_table_backup/my.active.firewall.rules
-			notification "Done" && sleep 2
+	    if [[ $choice == 'Stop' || $choice == 'stop' ]]; then
+		# Reverse changes
+		sudo iptables -F
+		sudo iptables -X
+		sudo iptables -Z
+		sudo iptables -t nat -F
+		sudo iptables -t nat -X
+		sudo iptables -t nat -Z
+		sudo iptables-restore ip_table_backup/my.active.firewall.rules
+		notification "Done" && sleep 2
 
-			menu
-		else
-			warning "Unhandled Option"
-		fi
+		menu
+	     else
+		warning "Unhandled Option"
+	    fi
 	fi
 	}
 
 function resources(){
 	# Online resources
 	logo
-  notification "View OPSEC related resources in your browser."
+        notification "View OPSEC related resources in your browser."
 	PS3='Please enter your choice: '
 	options=("Valid MAC Addresses" "HiddenWall - Kernel Module FireWall" "OPSEC Resources - GreySec" "OPSEC Resources - TheGrugq" "OPSEC Presentations - TheGrugq"  "Personal Security Guide - CryptoSeb" "OPSEC Blog - B3RN3D" "OPSEC & Privacy e-book - @CryptoCypher" "Quit")
 	select opt in "${options[@]}"
@@ -413,12 +413,14 @@ function resources(){
 			printf "%b \n"
 				;;
 			"Quit")
-             break
+                        break
 				;;
 			*) echo invalid option;;
 		esac
 	done
+  
   menu
+  
   }
 
 # Main menu
