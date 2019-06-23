@@ -103,12 +103,12 @@ function usage(){
 	echo -e "$CYAN
 +------------------------------------------------------>
 |	$RESET Options Overview $RESET $CYAN
-+------------------------------------------>                + $RESET
-$CYAN|$RESET CLI Arguments                            $CYAN | $RESET
-$CYAN|$RESET    '-t' or '--terminal' Starts           $CYAN | $RESET
-$CYAN|$RESET    terminal multiplexer with all         $CYAN | $RESET
-$CYAN|$RESET    connections routed through Tor        $CYAN | $RESET
-$CYAN|$RESET										  $CYAN | $RESET
++------------------------------------------>              + $RESET
+$CYAN|$RESET CLI Arguments                          $CYAN | $RESET
+$CYAN|$RESET    '-t' or '--terminal' Starts         $CYAN | $RESET
+$CYAN|$RESET    terminal multiplexer with all       $CYAN | $RESET
+$CYAN|$RESET    connections routed through Tor      $CYAN | $RESET
+$CYAN|$RESET										                    $CYAN | $RESET
 $CYAN|$RESET 	'-s' or '--status' prints a status    $CYAN | $RESET
 $CYAN|$RESET 	overview of NetSet related network    $CYAN + $RESET
 $CYAN|$RESET    utilities and their current state.
@@ -367,7 +367,7 @@ function ip_tabs(){
 function resources(){
 	# Online resources
 	logo
-    notification "View OPSEC related resources in your browser."
+  notification "View OPSEC related resources in your browser."
 	PS3='Please enter your choice: '
 	options=("Valid MAC Addresses" "HiddenWall - Kernel Module FireWall" "OPSEC Resources - GreySec" "OPSEC Resources - TheGrugq" "OPSEC Presentations - TheGrugq"  "Personal Security Guide - CryptoSeb" "OPSEC Blog - B3RN3D" "OPSEC & Privacy e-book - @CryptoCypher" "Quit")
 	select opt in "${options[@]}"
@@ -415,10 +415,8 @@ function resources(){
 			*) echo invalid option;;
 		esac
 	done
-
-    menu
-
-	}
+  menu
+  }
 
 # Main menu
 function menu(){
@@ -527,4 +525,3 @@ else
     # Check to see if depconf.sh has been succesfully executed
 	stat installed.log > /dev/null && go || warning "Dependencies missing, restart the script with --install" && exit 1
 fi
-
