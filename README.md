@@ -22,9 +22,17 @@ And more.
 After cloning the repo navigate to the `NetSet` directory and run the following:
 ```
 chmod +x *.sh
-sudo ./netset-main.sh --install
+ ./netset-main.sh --install
+
+#sudo ./netset-main.sh --install
 ```
-This will install and configure everything you'll need for NetSet to function properly.
+This will install and configure everything you'll need for NetSet to function properly. 
+
+### Update
+
+Using `sudo` to start the script will execute every operation within the script as root, this means you won't be prompted for your `sudo` password when an operation requires elevated privileges. However all items written by NetSet will consequently be owned by root as well, including backup directories. Last but not least; when considering security implications, it is not recommended to run everything with super user privileges.
+
+Starting the main script with `sudo` will be optional from now on to reflect the above considerations.
 
 ### Options
 
