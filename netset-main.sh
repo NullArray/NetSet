@@ -431,42 +431,42 @@ function menu(){
 			"Help")
 			usage
 			printf "%b \n"
-			;;
+			    ;;
 			"Status")
 			status
 			printf "%b \n"
-			;;
+			    ;;
 			"Spoof MAC")
 			chmac
 			printf "%b \n"
-			;;
+			    ;;
 			"Random Proxies")
 			r_proxies
 			printf "%b \n"
-			;;
+			    ;;
 			"GeoSort Proxies")
 			proxy_ops
 			printf "%b \n"
-			;;
+			    ;;
 			"ProtonVPN")
 			vpn_ops
 			printf "%b \n"
-			;;
+			    ;;
 			"Tor Terminal")
 			torsocks python -m pymux #|| . torsocks on
 			printf "%b \n"
-			;;
+			    ;;
 			"Tor Wall")
 			ip_tabs
 			printf "%b \n"
-			;;
+			    ;;
 			"OPSEC Resources")
 			resources
 			printf "%b \n"
-			;;
+			    ;;
 			"Quit")
 			 exit 0
-			;;
+			    ;;
 			*) echo invalid option;;
 		esac
 	done
