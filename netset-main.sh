@@ -22,13 +22,6 @@ CWD=$(pwd)
 NOW=$(date)
 # Active connected interface
 IFACES=$(ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}')
-
-# Default value for this var should be 0
-# When started with the --status arg set
-# value to 1 in order to print logo and
-# exit after one operation
-stus=0
-
 # Declare associative array for tip of the day feature
 declare -A TotD
 
@@ -438,42 +431,42 @@ function menu(){
 			"Help")
 			usage
 			printf "%b \n"
-				;;
+			;;
 			"Status")
 			status
 			printf "%b \n"
-				;;
+			;;
 			"Spoof MAC")
 			chmac
 			printf "%b \n"
-				;;
+			;;
 			"Random Proxies")
 			r_proxies
 			printf "%b \n"
-				;;
+			;;
 			"GeoSort Proxies")
 			proxy_ops
 			printf "%b \n"
-				;;
+			;;
 			"ProtonVPN")
 			vpn_ops
 			printf "%b \n"
-				;;
+			;;
 			"Tor Terminal")
 			torsocks python -m pymux #|| . torsocks on
 			printf "%b \n"
-				;;
+			;;
 			"Tor Wall")
 			ip_tabs
 			printf "%b \n"
-				;;
+			;;
 			"OPSEC Resources")
 			resources
 			printf "%b \n"
-				;;
+			;;
 			"Quit")
 			 exit 0
-				;;
+			;;
 			*) echo invalid option;;
 		esac
 	done
@@ -490,6 +483,8 @@ fi
 if [[ "$1" != "" ]]; then
     case $1 in
 	'-s' | '--status' )
+	logo
+	sleep 2
 	status
     esac
 fi
