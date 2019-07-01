@@ -234,10 +234,10 @@ function status(){
 	# CLI arg status operation ends here
 	if [[ $stus == 1 ]]; then notification_b "Status check completed" && exit 0; fi
 
-	    notification "Done."
-	    read -p 'Enter any button to continue: ' null
+	notification "Done."
+	read -p 'Enter any button to continue: ' null
 
-	    clear && menu
+	clear && menu
 
 	}
 
