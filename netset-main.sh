@@ -170,9 +170,7 @@ function chmac(){
 
 
 function status(){
-	# This function provides a quick overview of the network status
-        if [[ stus == 1 ]]; then logo; fi
-
+	# This function provides a quick status overview
 	notification "Loading status information..." && sleep 2
 
 	echo -e "Status on $NOW \n\n"
@@ -230,9 +228,6 @@ function status(){
 	    warning "Tor Service is inactive"
 	    sudo systemctl restart tor && notification "Service Restarted" || warning "An error was encountered while trying to start the Tor Service"
 	fi
-
-	# CLI arg status operation ends here
-	if [[ $stus == 1 ]]; then notification_b "Status check completed" && exit 0; fi
 
 	notification "Done."
 	read -p 'Enter any button to continue: ' null
@@ -485,7 +480,7 @@ if [[ "$1" != "" ]]; then
 	'-s' | '--status' )
 	logo
 	sleep 2
-	status
+	status && exit 0
     esac
 fi
 
