@@ -230,6 +230,8 @@ function status(){
 	fi
 
 	notification "Done."
+	if [[ $check == 1 ]]; then check=0 && exit 0; fi
+	
 	read -p 'Enter any button to continue: ' null
 
 	clear && menu
@@ -238,6 +240,9 @@ function status(){
 
 function proxy_ops(){
 	notification_b "Select Area"
+	# Australia and NZ are included in the 'N. America' option, since they are part of the five eyes countries
+	# The GeoSorting process is has a little less to do with the actual locations of the countries in general
+	# But with GeoPolitical zones of influence and/or control
 	echo -e "\n
 	[1] North America
 	[2] South America
@@ -478,9 +483,9 @@ fi
 if [[ "$1" != "" ]]; then
     case $1 in
 	'-s' | '--status' )
-	logo
+	logo && check=1
 	sleep 2
-	status && exit 0
+	status
     esac
 fi
 
