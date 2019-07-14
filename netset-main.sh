@@ -241,8 +241,10 @@ function status(){
 function proxy_ops(){
 	notification_b "Select Area"
 	# Australia and NZ are included in the 'N. America' option, since they are part of the five eyes countries
-	# The GeoSorting process is has a little less to do with the actual locations of the countries in general
-	# But with GeoPolitical zones of influence and/or control
+	# The GeoSorting process has a little less to do with the actual locations of the countries in general
+	# But with GeoPolitical zones of influence and/or control. Japan as an ally of the US should perhaps be
+	# Included in that option as well, but if you're from the West i suggest picking Russian sphere of 
+	# Influence countries.
 	echo -e "\n
 	[1] North America
 	[2] South America
