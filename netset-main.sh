@@ -367,7 +367,7 @@ function resources(){
 	logo
         notification "View OPSEC related resources in your browser."
 	PS3='Please enter your choice: '
-	options=("Valid MAC Addresses" "HiddenWall - Kernel Module FireWall" "OPSEC Resources - GreySec" "OPSEC Resources - TheGrugq" "OPSEC Presentations - TheGrugq"  "Personal Security Guide - CryptoSeb" "OPSEC Blog - B3RN3D" "OPSEC & Privacy e-book - @CryptoCypher" "Quit")
+	options=("Valid MAC Addresses" "DNSCrypt Resolvers" "HiddenWall - Kernel Module FireWall" "OPSEC Resources - GreySec" "OPSEC Resources - TheGrugq" "OPSEC Presentations - TheGrugq"  "Personal Security Guide - CryptoSeb" "OPSEC Blog - B3RN3D" "OPSEC & Privacy e-book - @CryptoCypher" "Quit")
 	select opt in "${options[@]}"
 	do
 		case $opt in
