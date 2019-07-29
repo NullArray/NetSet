@@ -263,7 +263,6 @@ function proxy_ops(){
 	    echo -e "Returning to main menu..."
 	    sleep 2 && menu
 	else
-	    warning "Unhandled Option"
 	    echo -e "Returning to main menu..."
 	    sleep 2 && menu
 
