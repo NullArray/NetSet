@@ -177,7 +177,7 @@ function chmac(){
 		if [[ $choice == 'c' || $choice == 'C' ]]; then
 			read -p 'Enter Custom MAC: ' value
 			for x in $IFACES; do sudo macchanger --mac=$value $x; done
-            		notification "Done" && sleep 4
+            notification "Done" && sleep 4
 		else
 			warning "Unhandled Option"
 		fi
@@ -383,7 +383,7 @@ function pw_ops(){
 	do
 		case $opt in
 			"Generate 16char password")
-			clear && pwgen --secure 16 1
+		 	clear && pwgen --secure 16 1
             read -p "Enter any button to continue..." null && logo
             echo -e "
 1) Generate 16char password  3) Generate 16char batch	  5) Quit
@@ -495,13 +495,13 @@ function resources(){
 			printf "%b \n"
 				;;
 			"Quit")
-             		break
+             break
 				;;
 			*) echo invalid option;;
 		esac
 	done
 
- 	menu
+  menu
 
 	}
 
@@ -613,12 +613,12 @@ if [[ "$EUID" -ne 0 ]]; then
     warning "Some operations require Root to run."
     read -p "Continue as normal user? [Y]es/[N]o " choice
     if [[ $choice == 'Y' || $choice == 'y' ]]; then
-	stat installed.log > /dev/null && init_x || warning "Dependencies missing, restart the script with --install" && exit 1
+		stat installed.log > /dev/null && init_x || warning "Dependencies missing, restart the script with --install" && exit 1
     else
-	warning "User Aborted"
+		warning "User Aborted"
         exit 1
-    fi
+	fi
 else
     # Check to see if depconf.sh has been succesfully executed
-    stat installed.log > /dev/null && init_x || warning "Dependencies missing, restart the script with --install" && exit 1
+	stat installed.log > /dev/null && init_x || warning "Dependencies missing, restart the script with --install" && exit 1
 fi
