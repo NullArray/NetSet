@@ -1,5 +1,6 @@
 # NetSet
-Operational Security utility and automator.
+Operational Security utility and automator. NetSet has been updated to Version 1.1.0
+
 
 NetSet is designed to automate a number of operations that will help the user with securing their
 network traffic. It also provides an easy way to gather proxies and run utilities through Tor.
@@ -29,6 +30,8 @@ chmod +x *.sh
 This will install and configure everything you'll need for NetSet to function properly. 
 
 ### Update
+
+From now on NetSet will install `veracrypt` and `pwgen` and provide automated features related to those utilities. 
 
 Using `sudo` to start the script will execute every operation within the script as root, this means you won't be prompted for your `sudo` password when an operation requires elevated privileges. However all items written by NetSet will consequently be owned by root as well, including backup directories. Last but not least; when considering security implications, it is not recommended to run everything with super user privileges.
 
@@ -65,6 +68,8 @@ Menu Options
  'Tor Wall'       - Configures iptables to
                     force all connections
                     through Tor.
+ 'Veracrypt'      - Start encryption and
+ 		    password gen menu	
  'OPSEC Resources'- Display NetSet's included
                     list of web resources.
   		    Select an entry to open
