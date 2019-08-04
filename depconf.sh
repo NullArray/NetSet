@@ -196,7 +196,7 @@ Pin-Priority: 100 " > pinning.pref
 			read -p 'Enter any button to to continue: ' null && clear
 			notification "Preparations complete. Installing."
 			sudo apt update && sudo apt install -y testing dnscrypt-proxy
-                        sudo apt install -y unstable dnscrypt-proxy
+            sudo apt install -y unstable dnscrypt-proxy
 			notification "Operations Completed"
 		else
 			os=$(uname -a)
@@ -230,8 +230,45 @@ Pin-Priority: 100 " > pinning.pref
 	fi
 
 	notification "Task Completed"
+
 	}
 
+# Install VeraCrypt and pwgen
+function vera(){
+	logo
+	echo -e "\n
+Welcome to the config and dependency manager for NetSet.
+
+The latest release adds VeraCrypt. This provides the user
+with the means to create encrypted volumes and keep data
+safe. This version also installs 'pwgen' in order to
+generate secure passwords conveniently.\n"
+	read -p 'Start installation? [Y]es/[N]o: ' choice
+	if [[ $choice == 'y' || $choice == 'Y' ]]; then
+		notification "Installing VeraCrypt" && sleep 2
+		# Create dir to extract tar to
+		mkdir veracrypt && cd veracrypt
+		wget -O veracrypt.tar.bz2 https://launchpad.net/veracrypt/trunk/1.23/+download/veracrypt-1.23-setup.tar.bz2
+		tar -xvjf veracrypt.tar.bz2 || warning "Something went wrong" && exit 1
+
+		MACHINE_TYPE=`uname -m`
+		if [[ ${MACHINE_TYPE} == 'x86_64' ]]; then
+			chmod +x veracrypt-1.23-setup-gui-x64
+			./veracrypt-1.23-setup-gui-x64 && notification "Installed VeraCrypt"
+		else
+			chmod +x veracrypt-1.23-setup-gui-x86
+			./veracrypt-1.23-setup-gui-x86 && notification "Installed VeraCrypt"
+		fi
+		# Back to depconf dir
+		cd ..
+
+		# Install pwgen for secure password generation
+		if [[ -z $(which pwgen) ]]; then
+			notification "Installing 'pwgen' for secure password generation." && sleep 2
+			sudo apt-get -y pwgen || warning "Something went wrong" && exit 1
+		fi
+	fi
+	}
 
 function start(){
 	# Print banner
@@ -245,14 +282,12 @@ Before making changes all relevant config files will
 be backed up in a directory labeled: 'backup- $(date) '\n"
 	read -p 'Start installation? [Y]es/[N]o: ' choice
 	if [[ $choice == 'y' || $choice == 'Y' ]]; then
-
-
-		# Install utilities
+        # Install utilities
 		notification "Checking system utilities." && sleep 2
 		if [[ -z $(which pymux) ]]; then pip install pymux; fi
 		if [[ -z $(which tor) ]]; then sudo apt-get -y install tor; fi
 		if [[ -z $(which nmcli) ]]; then sudo apt-get -y install nmcli; fi
-	        if [[ -z $(which torsocks) ]]; then sudo apt-get -y install torsocks; fi
+	    if [[ -z $(which torsocks) ]]; then sudo apt-get -y install torsocks; fi
 		if [[ -z $(which openvpn) ]]; then sudo apt-get -y install openvpn; fi
 		if [[ -z $(which iptables) ]]; then sudo apt-get -y install iptables; fi
 		if [[ -z $(which macchanger) ]]; then sudo apt-get -y install macchanger; fi
@@ -260,7 +295,7 @@ be backed up in a directory labeled: 'backup- $(date) '\n"
 			sudo apt-get -y install proxychains
 			notification_b "Proxychains has been installed, run 'man proxychains' for details."
 
-		fi
+        fi
 
 		notification "Packages checked."
 
@@ -295,6 +330,18 @@ be backed up in a directory labeled: 'backup- $(date) '\n"
 		warning "Installation Aborted"
 	fi
 
+	# Install VeraCrypt
+	vera
+
 	}
-# Start
-start
+
+# Check to see if we only need to install VeraCrypt
+if [[ "$1" != "" ]]; then
+    case $1 in
+		'--crypto' )
+		vera
+	esac
+else
+	# Install all
+	start
+fi
