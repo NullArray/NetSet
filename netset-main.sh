@@ -145,7 +145,7 @@ $CYAN|$RESET 'Veracrypt'      - Start encryption and
 $CYAN|$RESET		   	password gen menu
 $CYAN|$RESET 'OPSEC Resources'- Display NetSet's included
 $CYAN|$RESET                    list of web resources.
-$CYAN|$RESET  					Select an entry to open
+$CYAN|$RESET  			Select an entry to open
 $CYAN|$RESET                    it in your default browser
 $CYAN|$RESET
 $CYAN+----------------------------> $RESET
