@@ -177,7 +177,7 @@ function chmac(){
 		if [[ $choice == 'c' || $choice == 'C' ]]; then
 			read -p 'Enter Custom MAC: ' value
 			for x in $IFACES; do sudo macchanger --mac=$value $x; done
-            notification "Done" && sleep 4
+            		notification "Done" && sleep 4
 		else
 			warning "Unhandled Option"
 		fi
@@ -201,7 +201,7 @@ function status(){
 	sudo protonvpn-cli --status && sleep 3.5 || warning "ProtonVPN not configured"
 	notification "Loading relevant services status..." && sleep 2
 
-    sudo systemctl status tor.service
+        sudo systemctl status tor.service
 	tr=$(sudo systemctl status tor.service)
 	case $tr in
 		# Does the var contain the string below?
@@ -210,7 +210,7 @@ function status(){
 		;;
 	esac
 
-    sudo systemctl status openvpn.service
+        sudo systemctl status openvpn.service
 	ovpn=$(sudo systemctl status openvpn.service)
 	case $ovpn in
 		# Does the var contain the string below?
@@ -219,7 +219,7 @@ function status(){
 		;;
 	esac
 
-    sudo systemctl status dnscrypt-proxy.service
+        sudo systemctl status dnscrypt-proxy.service
 	dnsc=$(sudo systemctl status dnscrypt-proxy.service)
 	case $dnsc in
 		# Does the var contain the string below?
@@ -383,37 +383,36 @@ function pw_ops(){
 	do
 		case $opt in
 			"Generate 16char password")
-		 	clear && pwgen --secure 16 1
-            read -p "Enter any button to continue..." null && logo
-            echo -e "
+			clear && pwgen --secure 16 1
+                	read -p "Enter any button to continue..." null && logo
+            		echo -e "
 1) Generate 16char password  3) Generate 16char batch	  5) Quit
 2) Generate 32char password  4) Generate 32char batch\n"			
-            printf "%b \n"
+            		printf "%b \n"
 				;;
 			"Generate 32char password")
 			clear && pwgen --secure 32 1
-            read -p "Enter any button to continue..." null && logo
-            echo -e "
+            		read -p "Enter any button to continue..." null && logo
+            		echo -e "
 1) Generate 16char password  3) Generate 16char batch	  5) Quit
 2) Generate 32char password  4) Generate 32char batch\n"            
 			printf "%b \n"
 				;;
 			"Generate 16char batch")
 			clear && pwgen --secure 16 28
-            read -p "Enter any button to continue..." null && logo
-            echo -e "
+            		read -p "Enter any button to continue..." null && logo
+            		echo -e "
 1) Generate 16char password  3) Generate 16char batch	  5) Quit
 2) Generate 32char password  4) Generate 32char batch\n"
-
 			printf "%b \n"
 				;;	
 			"Generate 32char batch")
 			clear && pwgen --secure 32 14
-            read -p "Enter any button to continue..." null && logo
-            echo -e "
+            		read -p "Enter any button to continue..." null && logo
+            		echo -e "
 1) Generate 16char password  3) Generate 16char batch	  5) Quit
 2) Generate 32char password  4) Generate 32char batch\n"			
-            printf "%b \n"
+           	 	printf "%b \n"
 				;;	
 			"Quit")
 			break
@@ -452,7 +451,7 @@ function cryptodrome(){
 function resources(){
 	# Online resources
 	logo
-    notification "View OPSEC related resources in your browser."
+        notification "View OPSEC related resources in your browser."
 	PS3='Please enter your choice: '
 	options=("Valid MAC Addresses" "HiddenWall - Kernel Module FireWall" "OPSEC Resources - GreySec" "OPSEC Resources - TheGrugq" "OPSEC Presentations - TheGrugq"  "Personal Security Guide - CryptoSeb" "OPSEC Blog - B3RN3D" "OPSEC & Privacy e-book - @CryptoCypher" "Quit")
 	select opt in "${options[@]}"
@@ -495,7 +494,7 @@ function resources(){
 			printf "%b \n"
 				;;
 			"Quit")
-             break
+                        break
 				;;
 			*) echo invalid option;;
 		esac
@@ -576,22 +575,22 @@ fi
 # Check for command line arguments
 if [[ "$1" != "" ]]; then
     case $1 in
-		'-i' | '--install' )
-		bash depconf.sh && menu
+	'-i' | '--install' )
+	bash depconf.sh && menu
 	esac
 fi
 
 if [[ "$1" != "" ]]; then
 	case $1 in
-		'-s' | '--status' )
-		stus=1 && status
+	'-s' | '--status' )
+	stus=1 && status
 	esac
 fi
 
 if [[ "$1" != "" ]]; then
 	case $1 in
-		'-t' | '--terminal' )
-		torsocks python -m pymux #|| . torsocks on
+	'-t' | '--terminal' )
+	torsocks python -m pymux #|| . torsocks on
 	esac
 fi
 
@@ -620,5 +619,5 @@ if [[ "$EUID" -ne 0 ]]; then
 	fi
 else
     # Check to see if depconf.sh has been succesfully executed
-	stat installed.log > /dev/null && init_x || warning "Dependencies missing, restart the script with --install" && exit 1
+    stat installed.log > /dev/null && init_x || warning "Dependencies missing, restart the script with --install" && exit 1
 fi
