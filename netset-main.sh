@@ -501,7 +501,7 @@ function resources(){
 		esac
 	done
 
-  menu
+  	menu
 
 	}
 
@@ -597,27 +597,28 @@ fi
 
 
 function init_x(){
-    # Print banner
-    logo
-    # print intro
-    intro
-    # menu
-    menu
-    }
+    	# Print banner
+    	logo
+    	# print intro
+    	intro
+    	# menu
+	menu
+	
+	}
 
 # Check to see if VeraCrypt is installed
 if [[ -z $(which veracrypt) ]]; then stat installed.log > /dev/null && bash depconf.sh --crypto && menu; fi
 
 # Check for root
 if [[ "$EUID" -ne 0 ]]; then
-    warning "Some operations require Root to run."
-    read -p "Continue as normal user? [Y]es/[N]o " choice
-    if [[ $choice == 'Y' || $choice == 'y' ]]; then
-		stat installed.log > /dev/null && init_x || warning "Dependencies missing, restart the script with --install" && exit 1
-        else
+    	warning "Some operations require Root to run."
+    	read -p "Continue as normal user? [Y]es/[N]o " choice
+    	if [[ $choice == 'Y' || $choice == 'y' ]]; then
+    		stat installed.log > /dev/null && init_x || warning "Dependencies missing, restart the script with --install" && exit 1
+	else
 		warning "User Aborted"
-        exit 1
-    fi
+		exit 1
+	fi
 else
         # Check to see if depconf.sh has been succesfully executed
 	stat installed.log > /dev/null && init_x || warning "Dependencies missing, restart the script with --install" && exit 1
