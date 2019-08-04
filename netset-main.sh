@@ -141,6 +141,8 @@ $CYAN|$RESET                    routed through Tor
 $CYAN|$RESET 'Tor Wall'       - Configures iptables to
 $CYAN|$RESET                    force all connections
 $CYAN|$RESET                    through Tor.
+$CYAN|$RESET 'Veracrypt'      - Start encryption and
+$CYAN|$RESET		   	password gen menu
 $CYAN|$RESET 'OPSEC Resources'- Display NetSet's included
 $CYAN|$RESET                    list of web resources.
 $CYAN|$RESET  					Select an entry to open
