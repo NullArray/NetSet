@@ -196,7 +196,7 @@ Pin-Priority: 100 " > pinning.pref
 			read -p 'Enter any button to to continue: ' null && clear
 			notification "Preparations complete. Installing."
 			sudo apt update && sudo apt install -y testing dnscrypt-proxy
-            sudo apt install -y unstable dnscrypt-proxy
+            		sudo apt install -y unstable dnscrypt-proxy
 			notification "Operations Completed"
 		else
 			os=$(uname -a)
@@ -287,7 +287,7 @@ be backed up in a directory labeled: 'backup- $(date) '\n"
 		if [[ -z $(which pymux) ]]; then pip install pymux; fi
 		if [[ -z $(which tor) ]]; then sudo apt-get -y install tor; fi
 		if [[ -z $(which nmcli) ]]; then sudo apt-get -y install nmcli; fi
-	    if [[ -z $(which torsocks) ]]; then sudo apt-get -y install torsocks; fi
+	    	if [[ -z $(which torsocks) ]]; then sudo apt-get -y install torsocks; fi
 		if [[ -z $(which openvpn) ]]; then sudo apt-get -y install openvpn; fi
 		if [[ -z $(which iptables) ]]; then sudo apt-get -y install iptables; fi
 		if [[ -z $(which macchanger) ]]; then sudo apt-get -y install macchanger; fi
@@ -295,7 +295,7 @@ be backed up in a directory labeled: 'backup- $(date) '\n"
 			sudo apt-get -y install proxychains
 			notification_b "Proxychains has been installed, run 'man proxychains' for details."
 
-        fi
+        	fi
 
 		notification "Packages checked."
 
@@ -337,7 +337,7 @@ be backed up in a directory labeled: 'backup- $(date) '\n"
 
 # Check to see if we only need to install VeraCrypt
 if [[ "$1" != "" ]]; then
-    case $1 in
+    	case $1 in
 		'--crypto' )
 		vera
 	esac
