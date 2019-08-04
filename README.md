@@ -1,5 +1,5 @@
 # NetSet
-Operational Security utility and automator. NetSet has been updated to Version 1.1.0
+Operational Security utility and automator. ( Version 1.1.0 )
 
 
 NetSet is designed to automate a number of operations that will help the user with securing their
