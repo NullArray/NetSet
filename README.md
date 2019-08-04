@@ -31,7 +31,8 @@ This will install and configure everything you'll need for NetSet to function pr
 
 ### Update
 
-From now on NetSet will install `veracrypt` and `pwgen` and provide automated features related to those utilities. 
+From now on NetSet will install `veracrypt` and `pwgen` and provide automated operations related to those utilities on top of all the
+features Version 1.0.0 provides.
 
 Using `sudo` to start the script will execute every operation within the script as root, this means you won't be prompted for your `sudo` password when an operation requires elevated privileges. However all items written by NetSet will consequently be owned by root as well, including backup directories. Last but not least; when considering security implications, it is not recommended to run everything with super user privileges.
 
