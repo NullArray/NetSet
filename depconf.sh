@@ -319,9 +319,9 @@ be backed up in a directory labeled: 'backup- $(date) '\n"
 					warning "Skipping Account Creation"
 					if [[ -z $(which dialog) ]]; then sudo apt-get install -y dialog; fi
 
-					wget -O protonvpn-cli.sh https://gist.githubusercontent.com/NullArray/eec1d89a3171fc188f25cd633e26fba0/raw/1e359e2dca579aca2ad68b59111ef9bc58f593d2/protonvpn-cli.sh
-					chmod +x protonvpn-cli.sh
-					sudo ./protonvpn-cli.sh --install
+					pip3 install protonvpn-cli || sudo pip3 install protonvpn-cli
+					protonvpn init
+					
 				fi
 			fi
 		fi
