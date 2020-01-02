@@ -155,7 +155,7 @@ $CYAN+----------------------------> $RESET
 function vpn_ops(){
 	# Run VPN
 	notification_b "Starting ProtonVPN menu"
-	sudo protonvpn-cli -m || warning "Something went wrong"
+	sudo protonvpn connect || warning "Something went wrong"
 	notification "Done" && sleep 2
 	menu
 	}
