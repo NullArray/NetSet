@@ -380,51 +380,50 @@ function ip_tabs(){
 function pw_ops(){
     logo
     PS3='Please enter your choice: '
-	options=("Generate 16char password" "Generate 32char password" "Generate 16char batch" "Generate 32char batch" "Quit")
-	select opt in "${options[@]}"
-	do
-		case $opt in
-			"Generate 16char password")
-			clear && pwgen --secure 16 1
-                        read -p "Enter any button to continue..." null && logo
-                        echo -e "
+    options=("Generate 16char password" "Generate 32char password" "Generate 16char batch" "Generate 32char batch" "Quit")
+    select opt in "${options[@]}"
+    do
+    	case $opt in
+		"Generate 16char password")
+		clear && pwgen --secure 16 1
+		read -p "Enter any button to continue..." null && logo
+		echo -e "
 1) Generate 16char password  3) Generate 16char batch	  5) Quit
 2) Generate 32char password  4) Generate 32char batch\n"
-                        printf "%b \n"
-				;;
-			"Generate 32char password")
-			clear && pwgen --secure 32 1
-                        read -p "Enter any button to continue..." null && logo
-                        echo -e "
+		printf "%b \n"
+			;;
+		"Generate 32char password")
+		clear && pwgen --secure 32 1
+		read -p "Enter any button to continue..." null && logo
+		echo -e "
 1) Generate 16char password  3) Generate 16char batch	  5) Quit
 2) Generate 32char password  4) Generate 32char batch\n"
-			printf "%b \n"
-				;;
-			"Generate 16char batch")
-			clear && pwgen --secure 16 28
-                        read -p "Enter any button to continue..." null && logo
-                        echo -e "
+		printf "%b \n"
+			;;
+		"Generate 16char batch")
+		clear && pwgen --secure 16 28
+		read -p "Enter any button to continue..." null && logo
+		echo -e "
 1) Generate 16char password  3) Generate 16char batch	  5) Quit
 2) Generate 32char password  4) Generate 32char batch\n"
+		printf "%b \n"
+			;;
+		"Generate 32char batch")
+		clear && pwgen --secure 32 14
+		read -p "Enter any button to continue..." null && logo
+		echo -e "
+1) Generate 16char password  3) Generate 16char batch	  5) Quit
+2) Generate 32char password  4) Generate 32char batch\n"
+		printf "%b \n"
+			;;
+		"Quit")
+		break
+			;;
+		*) echo invalid option;;
+	esac
+    done
 
-			printf "%b \n"
-				;;
-			"Generate 32char batch")
-			clear && pwgen --secure 32 14
-                        read -p "Enter any button to continue..." null && logo
-                        echo -e "
-1) Generate 16char password  3) Generate 16char batch	  5) Quit
-2) Generate 32char password  4) Generate 32char batch\n"
-                        printf "%b \n"
-				;;
-			"Quit")
-			break
-				;;
-			*) echo invalid option;;
-		esac
-	done
-
-	menu
+    menu
 
 	}
 
