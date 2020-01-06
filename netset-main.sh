@@ -200,7 +200,7 @@ function status(){
 	echo -e "\n$CYAN Current External IP $RESET\n"
 	curl https://api.myip.com && sleep 3.5
 	echo -e "\n\n$CYAN Current VPN Status$RESET\n"
-	sudo protonvpn-cli --status && sleep 3.5 || warning "ProtonVPN not configured"
+	protonvpn status && sleep 3.5 || warning "ProtonVPN not configured"
 	notification "Loading relevant services status..." && sleep 2
 
         sudo systemctl status tor.service
