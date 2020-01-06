@@ -81,8 +81,8 @@ Menu Options
 Tested on Ubuntu 19.04
 
 The Python invocations to launch the web resources provided with NetSet are in 2.7 Syntax. If your OS doesn't 
-have Python2.7 changing the invocation from `python -m webbrowser URL` to `python3 -m webbrowser URL` should remdy any
-compatibility issues, should you come across them in this regard. 
+have Python2.7 changing the invocation from `python -m webbrowser URL` to `python3 -m webbrowser URL` should 
+remedy any compatibility issues, should you come across them in this particular regard. 
 
 I plan on expanding this tool in the future with even more OPSEC related resources and/or operations.
 
