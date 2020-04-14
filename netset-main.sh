@@ -19,7 +19,7 @@ GREEN=$ESC"32;01m"
 # Working dir
 CWD=$(pwd)
 # Date
-NOW=$(date)
+NOW=$(date +"%d_%m_%Y")
 # Active connected interface
 IFACES=$(ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}')
 
