@@ -25,7 +25,7 @@ process the configuration file that gets downloaded through `apt` or is written 
 script.
 
 Therefore i did some testing and managed to put together a `DNSCrypt-proxy.toml` file, based on original examples by
-the DNSCrypt dev that appears to work on most systems. If you're interested find it [here](https://gist.github.com/NullArray/28958795b16f8eda7a5b0a69f8ce57fe). If you're still facing some trouble, please don't hesitate to open up a ticket. And i'll get back to you as soon as i am able to to help you troubleshoot. Thanks!  
+the DNSCrypt dev that appears to work on most systems. If you're interested find it [here](https://gist.github.com/NullArray/28958795b16f8eda7a5b0a69f8ce57fe). If you're still facing some trouble, please don't hesitate to open up a ticket. And i'll get back to you as soon as i am able to, to help you troubleshoot. Thanks!  
 
 
 ## Usage
