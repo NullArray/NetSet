@@ -306,7 +306,7 @@ be backed up in a directory labeled: 'backup- $(date) '\n"
 		# Install proxy fetcher
 		wget -O proxies/fetch.py https://raw.githubusercontent.com/stamparm/fetch-some-proxies/master/fetch.py && echo "Proxy Fetcher installed" >> installed.log
 
-		if [[ -z $(which protonvpn-cli) ]]; then
+		if [[ -z $(which protonvpn) ]]; then
 			echo -e "Would you like to install ProtonVPN?"
 			read -p '[Y]es/[N]o ' choice
 			if [[ $choice == 'y' || $choice == 'Y' ]]; then
