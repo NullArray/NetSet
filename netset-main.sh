@@ -576,7 +576,7 @@ fi
 
 # Check for command line arguments
 if [[ "$1" != "" ]]; then
-    case $1 in
+    	case $1 in
 		'-i' | '--install' )
 		bash depconf.sh && menu
 	esac
